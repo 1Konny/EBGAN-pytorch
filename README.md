@@ -23,27 +23,13 @@ visdom
 ```
 <br>
 
-### Usage
-initialize visdom.
+### Result : CelebA(aligned, 64x64)
+(you can download CelebA dataset [here])
 ```
 python -m visdom.server
+python main.py --dataset CelebA --epoch 15 --batch_size 128 --PT_ratio 0.1 --m 20 --hidden_dim 256 --noise_dim 100
 ```
-train using CIFAR10 dataset. checkpoint will automatically be saved in ```checkpoint/run1``` for every epoch.
-```
-python main.py --model_type skip_repeat --dataset cifar10 --env_name run1
-```
-you can load checkpoint and continue training. make sure ```--env_name``` matched to previous runs.
-```
-python main.py --model_type skip_repeat --dataset cifar10 --env_name run1 --load_ckpt True
-```
-you can check the training process.
-```
-localhost:8097
-```
-you can also train using your own dataset. make sure your dataset is appropriate for pytorch ImageFolder class. please check data directory tree below.
-```
-python main.py --model_type skip_repeat --dataset custom_dataset --env_name run1
-```
+![celeba_fixed](misc/celeba_64x64.png)
 <br>
 
 ### [data directory tree]
@@ -62,14 +48,6 @@ python main.py --model_type skip_repeat --dataset custom_dataset --env_name run1
             ├── ...
     └── ...
 ```
-<br>
-
-### Result : CelebA(aligned, 64x64)
-(you can download CelebA dataset [here])
-```
-python main.py --dataset CelebA --epoch 15 --batch_size 128 --PT_ratio 0.1 --m 20 --hidden_dim 256 --noise_dim 100
-```
-![celeba_fixed](misc/celeba_64x64.png)
 <br>
 
 ### References

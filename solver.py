@@ -54,7 +54,7 @@ class EBGAN(object):
 
         self.output_dir = Path(args.output_dir).joinpath(args.env_name)
         self.visualization_init()
-        
+
         self.lr_step_size = len(self.data_loader['train'].dataset)//self.batch_size*self.epoch//8
 
     def visualization_init(self):
@@ -74,7 +74,7 @@ class EBGAN(object):
 
         self.D_optim = optim.Adam(self.D.parameters(), lr=self.D_lr, betas=(0.5, 0.999))
         self.G_optim = optim.Adam(self.G.parameters(), lr=self.G_lr, betas=(0.5, 0.999))
-        
+
         self.D_optim_scheduler = lr_scheduler.StepLR(self.D_optim, step_size=1, gamma=0.5)
         self.G_optim_scheduler = lr_scheduler.StepLR(self.G_optim, step_size=1, gamma=0.5)
 
@@ -143,11 +143,12 @@ class EBGAN(object):
                     self.sample_img('fixed')
                     self.sample_img('random')
                     self.save_checkpoint()
-                    
+
                 if self.global_iter%self.lr_step_size == 0:
                     self.scheduler_step()
 
             elapsed = (time.time()-elapsed)
+            print()
             print('epoch {:d}, [{:.2f}s]'.format(e, elapsed))
 
         print("[*] Training Finished!")
@@ -175,7 +176,7 @@ class EBGAN(object):
             self.D.eval()
         else:
             raise('mode error. It should be either train or eval')
-            
+
     def scheduler_step(self):
         self.D_optim_scheduler.step()
         self.G_optim_scheduler.step()

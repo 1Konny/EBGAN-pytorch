@@ -29,7 +29,10 @@ visdom
 python -m visdom.server
 python main.py --dataset CelebA --epoch 15 --batch_size 128 --PT_ratio 0.1 --m 20 --hidden_dim 256 --noise_dim 100
 ```
-![celeba_fixed](misc/celeba_64x64.png)
+#### fixed generation
+![celeba_fixed](misc/celeba_64x64_fixed.gif)
+#### random generation
+![celeba_random](misc/celeba_64x64_random.jpg)
 <br>
 
 ### [data directory tree]

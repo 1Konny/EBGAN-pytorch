@@ -27,7 +27,7 @@ visdom
 (you can download CelebA dataset [here])
 ```
 python -m visdom.server
-python main.py --dataset CelebA --epoch 15 --batch_size 128 --PT_ratio 0.1 --m 20 --hidden_dim 256 --noise_dim 100
+python main.py --dataset CelebA --epoch 15 --batch_size 32 --PT_ratio 1 --m 20 --hidden_dim 128 --noise_dim 100
 ```
 #### fixed generation
 ![celeba_fixed](misc/celeba_64x64_fixed.gif)

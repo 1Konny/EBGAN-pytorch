@@ -55,7 +55,7 @@ class EBGAN(object):
         self.output_dir = Path(args.output_dir).joinpath(args.env_name)
         self.visualization_init()
 
-        self.lr_step_size = len(self.data_loader['train'].dataset)//self.batch_size*self.epoch//8
+        self.lr_step_size = len(self.data_loader['train'].dataset)//self.batch_size*self.epoch//2
 
     def visualization_init(self):
         if self.visdom:
@@ -163,9 +163,11 @@ class EBGAN(object):
         S1 = s1.unsqueeze(1).repeat(1, s2.size(0), 1)
         S2 = s2.unsqueeze(0).repeat(s1.size(0), 1, 1)
 
-        PT = (S1.mul(S2).sum(-1).pow(2).sum(-1)-1).sum(-1).div(n*(n-1))
+        f_PT = S1.mul(S2).sum(-1).pow(2)
+        f_PT = torch.tril(f_PT, -1).sum().mul(2).div((n*(n-1)))
 
-        return PT
+        #f_PT = (S1.mul(S2).sum(-1).pow(2).sum(-1)-1).sum(-1).div(n*(n-1))
+        return f_PT
 
     def set_mode(self, mode='train'):
         if mode == 'train':

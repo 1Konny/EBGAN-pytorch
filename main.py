@@ -30,14 +30,14 @@ if __name__ == "__main__":
 
     # Optimization
     parser.add_argument('--epoch', default=20, type=int, help='epoch size')
-    parser.add_argument('--batch_size', default=128, type=int, help='batch size')
+    parser.add_argument('--batch_size', default=32, type=int, help='batch size')
     parser.add_argument('--PT_ratio', default=0.1, type=float, help='cost weight of pulling-away term')
-    parser.add_argument('--D_lr', default=1e-3, type=float, help='learning rate for the Discriminator')
-    parser.add_argument('--G_lr', default=2e-3, type=float, help='learning rate for the Generator')
+    parser.add_argument('--D_lr', default=1e-4, type=float, help='learning rate for the Discriminator')
+    parser.add_argument('--G_lr', default=2e-4, type=float, help='learning rate for the Generator')
     parser.add_argument('--m', default=20, type=float, help='margin m')
 
     # Network
-    parser.add_argument('--hidden_dim', default=256, type=int, help='hidden dimension of Autoencoder')
+    parser.add_argument('--hidden_dim', default=128, type=int, help='hidden dimension of Autoencoder')
     parser.add_argument('--noise_dim', default=100, type=int, help='noise dimension of Generator')
     parser.add_argument('--load_ckpt', default=True, type=str2bool, help='load previous checkpoint')
     parser.add_argument('--ckpt_dir', default='checkpoint', type=str, help='checkpoint directory')

@@ -88,7 +88,7 @@ class EBGAN(object):
         criterion = F.mse_loss
         #criterion = F.l1_loss
         for e in range(self.epoch):
-            self.global_iter += 1
+            self.global_epoch += 1
             elapsed = time.time()
 
             for idx, (images, labels) in enumerate(self.data_loader['train']):
@@ -106,7 +106,10 @@ class EBGAN(object):
                 D_fake = self.D(x_fake.detach())[0]
                 D_loss_fake = criterion(D_fake, x_fake)
 
-                D_loss = D_loss_real + (self.m-D_loss_fake).clamp(min=0)
+                #D_loss = D_loss_real + (self.m-D_loss_fake).clamp(min=0)
+                D_loss = D_loss_real
+                if D_loss_fake.data[0] < self.m:
+                    D_loss += (self.m-D_loss_fake)
 
                 self.D_optim.zero_grad()
                 D_loss.backward()
